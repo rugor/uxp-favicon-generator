@@ -67,6 +67,12 @@ async function exportFavicons() {
             overwrite: true,
           })
 
+          // Create additional output files with simplified names
+          const light = await folder.createFile('light.png', {
+            overwrite: true,
+          })
+          const dark = await folder.createFile('dark.png', { overwrite: true })
+
           // Step 1: Save light@2x.png (46x46)
           console.log('Saving light@2x.png at 46x46')
           await originalDoc.saveAs.png(light2x)
@@ -94,15 +100,20 @@ async function exportFavicons() {
           tempDoc = null
 
           // Step 3: Create 23x23 version for light@1x.png
-          console.log('Creating and saving light@1x.png at 23x23')
+          console.log('Creating and saving light@1x.png and light.png at 23x23')
           tempDoc = await originalDoc.duplicate()
           await tempDoc.resizeImage(23, 23)
           await tempDoc.saveAs.png(light1x)
+
+          // Save additional copy as light.png
+          await tempDoc.saveAs.png(light)
+          console.log('Saved additional light.png file')
+
           await tempDoc.close('no')
           tempDoc = null
 
           // Step 4: Create 23x23 version for dark@1x.png
-          console.log('Creating and saving dark@1x.png at 23x23')
+          console.log('Creating and saving dark@1x.png and dark.png at 23x23')
           tempDoc = await originalDoc.duplicate()
 
           // First invert colors
@@ -119,6 +130,11 @@ async function exportFavicons() {
           // Then resize to 23x23
           await tempDoc.resizeImage(23, 23)
           await tempDoc.saveAs.png(dark1x)
+
+          // Save additional copy as dark.png
+          await tempDoc.saveAs.png(dark)
+          console.log('Saved additional dark.png file')
+          
           await tempDoc.close('no')
           tempDoc = null
 

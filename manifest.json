@@ -1,6 +1,6 @@
 {
   "id": "project-favicon-2rlrys",
-  "name": "Project Favicon",
+  "name": "UXP Favicons",
   "version": "1.0.0",
   "main": "index.html",
   "host": [
@@ -65,7 +65,7 @@
         }
       ],
       "label": {
-        "default": "Starter Panel"
+        "default": "Generate Favicons"
       }
     }
   ],
